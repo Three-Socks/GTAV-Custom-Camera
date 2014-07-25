@@ -74,8 +74,29 @@ Switch [0 @Label_level_0]:[1 @Label_level_1]
 Jump @Label_level_end
 
 :Label_level_0
-PushString "Create Cameara"
-Call @menu_addItem_action
+PushString "Create Camera"
+Call @menu_addItem
+
+PushString "X"
+Call @menu_addItem
+fPush_0.0
+fPush -9999.9
+fPush 9999.9
+Call @menu_addItem_float
+
+PushString "Y"
+Call @menu_addItem
+fPush_0.0
+fPush -9999.9
+fPush 9999.9
+Call @menu_addItem_float
+
+PushString "Z"
+Call @menu_addItem
+fPush_0.0
+fPush -9999.9
+fPush 9999.9
+Call @menu_addItem_float
 Return 0 0
 
 :Label_level_1
@@ -86,17 +107,97 @@ Return 0 0
 Return 0 0
 
 :cc_level_1
-Function 1 0 4
+Function 1 0 7
 
 iPush_0
 pstatic2 61
 ArrayGet1 1
-Switch [3 @Label_last_selected_3]
+Switch [0 @Label_last_selected_0]
 Jump @Label_level_1_end
 
-:Label_last_selected_3
-PushString "Option"
-Call @menu_addItem_action
+:Label_last_selected_0
+PushString "Name"
+PushString "DEFAULT_SCRIPTED_CAMERA"
+Push1 60
+Call @menu_addItem_keyboard
+
+CallNative player_ped_id 0 1
+iPush_1
+CallNative get_entity_coords 2 3
+iPush_3
+pFrame1 3
+FromStack
+
+PushString "X Coord"
+Call @menu_addItem
+getF 3
+fPush -9999.9
+fPush 9999.9
+iPush_5
+Call @menu_addItem_float_keyboard
+
+PushString "Y Coord"
+Call @menu_addItem
+pFrame1 3
+GetImmediate1 1
+fPush -9999.9
+fPush 9999.9
+iPush_5
+Call @menu_addItem_float_keyboard
+
+PushString "Z Coord"
+Call @menu_addItem
+pFrame1 3
+GetImmediate1 2
+fPush -9999.9
+fPush 9999.9
+iPush_5
+Call @menu_addItem_float_keyboard
+
+PushString "X Coord 2"
+Call @menu_addItem
+fPush_0.0
+fPush -9999.9
+fPush 9999.9
+iPush_5
+Call @menu_addItem_float_keyboard
+
+PushString "Y Coord 2"
+Call @menu_addItem
+fPush_0.0
+fPush -9999.9
+fPush 9999.9
+iPush_5
+Call @menu_addItem_float_keyboard
+
+PushString "Z Coord 2"
+Call @menu_addItem
+fPush_0.0
+fPush -9999.9
+fPush 9999.9
+iPush_5
+Call @menu_addItem_float_keyboard
+
+PushString "FOV"
+Call @menu_addItem
+fPush 50
+fPush -9999.9
+fPush 9999.9
+Call @menu_addItem_float
+
+PushString "Option 1"
+Call @menu_addItem
+iPush_0
+fPush -9999.9
+fPush 9999.9
+Call @menu_addItem_float
+
+PushString "Option 2"
+Call @menu_addItem
+iPush_2
+fPush -9999.9
+fPush 9999.9
+Call @menu_addItem_float
 Return 0 0
 
 :Label_level_1_end
@@ -114,7 +215,7 @@ Call @cc_level_0
 Return 0 0
 
 :menu_action
-Function 1 0 2
+Function 1 0 26
 iPush_1
 StaticGet1 7
 JumpNE @Label_menu_action_2
@@ -150,6 +251,99 @@ StaticGet1 7
 JumpNE @Label_action_end
 iPush_0
 StaticSet1 7
+
+iPush_6
+StaticGet1 4
+pstatic1 123
+ArrayGet1 1
+JumpNE @Label_action_keyboard_number
+PushString "HTX_ENTER"
+Call @menu_keyboard
+JumpFalse @Label_action_keyboard_goto_end
+CallNative get_onscreen_keyboard_result 0 1
+CallNative is_string_null_or_empty 1 1
+Not
+JumpFalse @Label_action_keyboard_goto_end
+
+CallNative get_onscreen_keyboard_result 0 1
+CallNative get_length_of_literal_string 1 1
+Push1 63
+JumpGT @Label_action_keyboard_goto_end
+
+StaticGet1 4
+CallNative get_onscreen_keyboard_result 0 1
+Call @menu_set_number
+iPush_1
+StaticSet1 7
+
+:Label_action_keyboard_goto_end
+Jump @Label_action_end
+
+:Label_action_keyboard_number
+iPush_7
+StaticGet1 4
+pstatic1 123
+ArrayGet1 1
+JumpNE @Label_action_keyboard_float
+PushString "CELL_221"
+Call @menu_keyboard
+JumpFalse @Label_action_keyboard_number_goto_end
+CallNative get_onscreen_keyboard_result 0 1
+CallNative is_string_null_or_empty 1 1
+Not
+JumpFalse @Label_action_keyboard_number_goto_end
+
+CallNative get_onscreen_keyboard_result 0 1
+pFrame1 3
+StrCopy 16
+
+pFrame1 3
+pFrame1 13
+CallNative string_to_int 2 1
+JumpFalse @Label_action_keyboard_number_goto_end
+
+getF 13
+Call @menu_get_current_extra
+JumpLE @Label_action_number_keyboard_set
+Call @menu_get_current_extra
+setF 13
+
+:Label_action_number_keyboard_set
+StaticGet1 4
+getF 13
+Call @menu_set_number
+
+:Label_action_keyboard_number_goto_end
+Jump @Label_action_end
+
+:Label_action_keyboard_float
+Push1 12
+StaticGet1 4
+pstatic1 123
+ArrayGet1 1
+JumpNE @Label_action_end
+PushString "CELL_221"
+Call @menu_keyboard
+JumpFalse @Label_action_end
+CallNative get_onscreen_keyboard_result 0 1
+CallNative is_string_null_or_empty 1 1
+Not
+JumpFalse @Label_action_end
+
+CallNative get_onscreen_keyboard_result 0 1
+pFrame1 3
+StrCopy 16
+
+pFrame1 3
+pFrame1 13
+CallNative string_to_int 2 1
+JumpFalse @Label_action_end
+
+StaticGet1 4
+getF 13
+CallNative to_float 1 1
+
+Call @menu_set_number
 
 :Label_action_end
 Return 0 0
@@ -786,7 +980,7 @@ iPush_0
 StaticSet1 4
 iPush_-1
 StaticSet1 5
-iPush_0
+iPush_1
 Call @menu_set_open_state
 
 :Label_menu_setup_continue
@@ -1925,7 +2119,7 @@ ArrayGet1 1
 JumpNE @Label_menu_keyboard_3
 Call @menu_get_current_keyboard
 pFrame1 6
-StrCopy 16
+StrCopy 64
 
 pFrame1 6
 CallNative is_string_null_or_empty 1 1
@@ -2138,6 +2332,7 @@ PushString "CommonMenu"
 CallNative set_streamed_texture_dict_as_no_longer_needed 1 0
 iPush_0
 Call @menu_set_open_state
+CallNative terminate_this_thread 0 0
 
 :menu_hide_end
 Return 0 0
