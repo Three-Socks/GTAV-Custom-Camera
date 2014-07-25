@@ -370,6 +370,9 @@ Return 0 0
 :cc_setup
 Function 1 0 4
 
+iPush_1
+Call @menu_set_open_state
+
 Return 0 0
 
 :cc_security_checks
@@ -441,6 +444,24 @@ PushString "Edit With Keyboard"
 Call @menu_add_frontend
 
 :Label_menu_draw_frontend_hook_end
+Return 0 0
+
+:menu_hide
+Function 1 0 2
+Call @menu_reverse_game_state
+iPush_0
+StaticSet1 13
+pstatic1 12
+CallNative set_scaleform_movie_as_no_longer_needed 1 0
+iPush_0
+StaticSet1 27
+PushString "CommonMenu"
+CallNative set_streamed_texture_dict_as_no_longer_needed 1 0
+iPush_0
+Call @menu_set_open_state
+CallNative terminate_this_thread 0 0
+
+:menu_hide_end
 Return 0 0
 
 :menu_addItem
@@ -644,18 +665,24 @@ pstatic1 174
 ArraySet1 1
 
 :Label_menu_addItem_float_end
-Return 2 0
+Return 3 0
 
-:menu_add_float
+:menu_add_data_2
 Function 1 1 4
 
 getF 0
 StaticGet1 5
-pstatic2 276
+pstatic2 327
 ArraySet1 1
-
-:Label_menu_add_float_end
 Return 1 0
+
+:menu_get_current_data_2
+Function 1 0 4
+
+StaticGet1 4
+pstatic2 327
+ArrayGet1 1
+Return 0 1
 
 :menu_addItem_bool
 Function 1 1 4
@@ -725,26 +752,6 @@ getF 0
 pstatic1 174
 ArrayGet1 1
 Return 1 1
-
-:menu_addItem_gxt
-Function 1 1 4
-
-StaticGet1 5
-Add1 1
-StaticSet1 5
-
-getF 0
-StaticGet1 5
-pstatic1 72
-ArraySet1 1
-
-iPush_4
-StaticGet1 5
-pstatic1 123
-ArraySet1 1
-
-:Label_menu_addItem_gxt_end
-Return 1 0
 
 :menu_addItem_gxt_veh_hash
 Function 1 1 4
@@ -938,6 +945,20 @@ ArraySet1 1
 
 Return 2 0
 
+:menu_set_catch_button_id
+Function 1 1 4
+
+getF 0
+StaticSet1 30
+
+Return 1 0
+
+:menu_get_catch_button_id
+Function 1 0 4
+
+StaticGet1 30
+Return 0 1
+
 :menu_add_frontend
 Function 1 3 5
 
@@ -980,10 +1001,6 @@ iPush_0
 StaticSet1 4
 iPush_-1
 StaticSet1 5
-iPush_1
-Call @menu_set_open_state
-
-:Label_menu_setup_continue
 iPush_0
 StaticSet1 7
 iPush_0
@@ -1048,6 +1065,12 @@ SetImmediate2 6183
 CallNative hide_help_text_this_frame 0 0
 iPush_0
 CallNative set_cinematic_button_active 1 0
+
+CallNative player_ped_id 0 1
+iPush_1
+iPush_-1
+iPush_0
+CallNative set_ped_using_action_mode 4 0
 
 iPush_0
 iPush_0
@@ -1501,6 +1524,12 @@ Return 1 1
 
 :menu_reverse_game_state
 Function 1 0 2
+CallNative player_ped_id 0 1
+iPush_0
+iPush_-1
+iPush_0
+CallNative set_ped_using_action_mode 4 0
+
 iPush_1
 CallNative set_cinematic_button_active 1 0
 Return 0 0
@@ -1700,10 +1729,6 @@ pstatic2 276
 ArraySet1 1
 
 :Label_catch_button_press_goto_7
-iPush_-1
-PushString "NAV_LEFT_RIGHT"
-PushString "HUD_FRONTEND_DEFAULT_SOUNDSET"
-CallNative play_sound_frontend 3 0
 Jump @Label_catch_button_press_goto_7_1
 
 :Label_catch_button_press_left_float
@@ -1723,15 +1748,19 @@ CmpEq
 Or
 
 :Label_catch_left_button_float_press_or
-JumpFalse @Label_catch_button_press_left_float_2
+JumpFalse @Label_catch_button_press_goto_7_1
 
 StaticGet1 4
 pstatic2 327
 ArrayGet1 1
+fPush 0.110
+fAdd
+ItoF
 StaticGet1 4
 pstatic2 276
 ArrayGet1 1
-fCmpNe
+ItoF
+fCmpLe
 JumpFalse @Label_catch_button_press_left_float_1
 
 StaticGet1 4
@@ -1752,13 +1781,11 @@ StaticGet1 4
 pstatic2 276
 ArraySet1 1
 
-:Label_catch_button_press_left_float_2
+:Label_catch_button_press_goto_7_1
 iPush_-1
 PushString "NAV_LEFT_RIGHT"
 PushString "HUD_FRONTEND_DEFAULT_SOUNDSET"
 CallNative play_sound_frontend 3 0
-
-:Label_catch_button_press_goto_7_1
 Jump @Label_catch_button_press_end
 
 :Label_catch_right_button_press
@@ -1810,11 +1837,7 @@ pstatic2 276
 ArraySet1 1
 
 :Label_catch_button_press_right_goto_7
-iPush_-1
-PushString "NAV_LEFT_RIGHT"
-PushString "HUD_FRONTEND_DEFAULT_SOUNDSET"
-CallNative play_sound_frontend 3 0
-Jump @Label_catch_button_press_end
+Jump @Label_catch_button_press_right_float_2
 
 :Label_catch_button_press_right_float
 iPush_2
@@ -1838,10 +1861,14 @@ JumpFalse @Label_catch_button_press_right_float_2
 StaticGet1 4
 pstatic2 276
 ArrayGet1 1
+ItoF
 StaticGet1 4
 pstatic1 174
 ArrayGet1 1
-fCmpNe
+fPush 0.010
+fSub
+ItoF
+fCmpLe
 JumpFalse @Label_catch_button_press_right_float_1
 
 StaticGet1 4
@@ -1852,7 +1879,7 @@ fAdd
 StaticGet1 4
 pstatic2 276
 ArraySet1 1
-Jump @Label_catch_button_press_end
+Jump @Label_catch_button_press_right_float_2
 
 :Label_catch_button_press_right_float_1
 StaticGet1 4
@@ -2042,6 +2069,9 @@ Return 0 0
 
 :menu_add_int_to_string
 Function 1 2 16
+PushString ""
+pFrame1 4
+StrCopy 16
 getF 1
 pFrame1 4
 StrCopy 16
@@ -2119,7 +2149,7 @@ ArrayGet1 1
 JumpNE @Label_menu_keyboard_3
 Call @menu_get_current_keyboard
 pFrame1 6
-StrCopy 64
+StrCopy 16
 
 pFrame1 6
 CallNative is_string_null_or_empty 1 1
@@ -2254,6 +2284,8 @@ getF 2
 JumpFalse @Label_menu_error_2_strings_1
 iPush_0
 StaticSet1 11
+iPush_0
+StaticSet1 45
 
 Call @menu_clean
 
@@ -2268,6 +2300,7 @@ ArrayGet1 1
 StaticSet1 4
 
 Call @menu_set
+Call @menu_set_frontend
 
 :Label_menu_error_2_strings_1
 PushString "TWOSTRINGS"
@@ -2290,6 +2323,8 @@ getF 2
 JumpFalse @Label_menu_error_2_strings_gxt_1
 iPush_0
 StaticSet1 11
+iPush_0
+StaticSet1 45
 
 Call @menu_clean
 
@@ -2304,6 +2339,7 @@ ArrayGet1 1
 StaticSet1 4
 
 Call @menu_set
+Call @menu_set_frontend
 
 :Label_menu_error_2_strings_gxt_1
 PushString "TWOSTRINGS"
@@ -2318,24 +2354,6 @@ CallNative unk_0x08F7AF78 2 1
 drop
 
 Return 3 0
-
-:menu_hide
-Function 1 0 2
-Call @menu_reverse_game_state
-iPush_0
-StaticSet1 13
-pstatic1 12
-CallNative set_scaleform_movie_as_no_longer_needed 1 0
-iPush_0
-StaticSet1 27
-PushString "CommonMenu"
-CallNative set_streamed_texture_dict_as_no_longer_needed 1 0
-iPush_0
-Call @menu_set_open_state
-CallNative terminate_this_thread 0 0
-
-:menu_hide_end
-Return 0 0
 
 :menu_frontend_clean
 Function 1 0 3
@@ -2360,9 +2378,9 @@ setF 4
 
 :Label_menu_clean_LOOP
 getF 3
-getF 4
+Push1 50
 JumpGE @Label_menu_clean_END
-PushString ""
+iPush_0
 getF 3
 pstatic1 72
 ArraySet1 1
@@ -2415,6 +2433,9 @@ StaticSet1 28
 
 iPush_0
 StaticSet1 29
+
+iPush_0
+StaticSet1 30
 
 Call @menu_frontend_clean
 
@@ -2909,7 +2930,7 @@ CallNative unk_0x6F8350CE 2 0
 Return 2 0
 
 :menu_draw
-Function 1 0 68
+Function 1 0 35
 
 iPush_0
 setF 3
@@ -3042,26 +3063,6 @@ getF 17
 setF 20
 
 :Label_draw_menu_2
-iPush_4
-getF 3
-pstatic1 123
-ArrayGet1 1
-JumpNE @Label_draw_menu_gxt_end
-getF 18
-getF 19
-getF 20
-fPush_1.0
-iPush_0
-Call @set_up_draw
-getF 3
-pstatic1 72
-ArrayGet1 1
-StaticGet1 3
-getF 5
-Call @draw_string_gxt
-Jump @Label_draw_menu_bool
-
-:Label_draw_menu_gxt_end
 iPush_5
 getF 3
 pstatic1 123
@@ -3081,7 +3082,6 @@ StaticGet1 3
 getF 5
 Call @draw_string_gxt
 Jump @Label_draw_menu_bool
-
 
 :Label_draw_menu_gxt_veh_hash_end
 iPush_6
@@ -3642,13 +3642,27 @@ Return 3 0
 
 :draw_string
 Function 1 3 3
+
+getF 0
+CallNative does_text_label_exist 1 1
+JumpFalse @Label_draw_string_1
+getF 0
+CallNative unk_0x3E35563E 1 0
+Jump @Label_draw_string_2
+
+:Label_draw_string_1
 PushString "STRING"
 CallNative unk_0x3E35563E 1 0
+
 getF 0
 CallNative unk_0x27A244D8 1 0
+
+:Label_draw_string_2
 getF 1
 getF 2
 CallNative unk_0x6F8350CE 2 0
+
+:Label_draw_string_end
 Return 3 0
 
 :draw_string_gxt
