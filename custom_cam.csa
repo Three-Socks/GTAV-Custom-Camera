@@ -66,7 +66,7 @@ Return 1 0
 :cc_level_0
 Function 1 0 4
 
-PushString "Custom Camera"
+PushString "Custom Camera ALPHA"
 StaticSet1 10
 
 StaticGet1 9
@@ -135,7 +135,7 @@ Return 0 0
 Return 0 0
 
 :cc_level_1
-Function 1 0 7
+Function 1 0 14
 
 iPush_0
 pstatic2 61
@@ -289,6 +289,52 @@ fPush 9999.9
 Push1 10
 Call @menu_addItem_float_keyboard
 Call @menu_add_action
+
+StaticGet2 378
+iPush_2
+CallNative get_cam_rot 2 3
+iPush_3
+pFrame1 6
+FromStack
+
+PushString "Rotation X Coord"
+Call @menu_addItem
+getF 6
+fPush -9999.9
+fPush 9999.9
+Push1 10
+Call @menu_addItem_float_keyboard
+Call @menu_add_action
+
+PushString "Rotation Y Coord"
+Call @menu_addItem
+pFrame1 6
+GetImmediate1 1
+fPush -9999.9
+fPush 9999.9
+Push1 10
+Call @menu_addItem_float_keyboard
+Call @menu_add_action
+
+PushString "Rotation Z Coord"
+Call @menu_addItem
+pFrame1 6
+GetImmediate1 2
+fPush -9999.9
+fPush 9999.9
+Push1 10
+Call @menu_addItem_float_keyboard
+Call @menu_add_action
+
+PushString "Field of View"
+Call @menu_addItem
+StaticGet2 378
+CallNative get_cam_fov 1 1
+fPush -9999.9
+fPush 9999.9
+Push1 10
+Call @menu_addItem_float_keyboard
+Call @menu_add_action
 Return 0 0
 
 :Label_cc_level_1_2
@@ -379,7 +425,7 @@ Return 0 0
 
 :Label_cc_action_level_1_1_exist
 StaticGet1 4
-Switch [0 @Label_cc_action_level_1_1_0]:[1 @Label_cc_action_level_1_1_1]:[2 @Label_cc_action_level_1_1_2]:[3 @Label_cc_action_level_1_1_3]
+Switch [0 @Label_cc_action_level_1_1_0]:[1 @Label_cc_action_level_1_1_1]:[2 @Label_cc_action_level_1_1_2]:[3 @Label_cc_action_level_1_1_3]:[4 @Label_cc_action_level_1_1_4]:[5 @Label_cc_action_level_1_1_5]:[6 @Label_cc_action_level_1_1_6]:[7 @Label_cc_action_level_1_1_7]
 Jump @Label_cc_action_level_1_1_end
 
 :Label_cc_action_level_1_1_0
@@ -430,6 +476,48 @@ Call @menu_get_number
 iPush_3
 Call @menu_get_number
 CallNative set_cam_coord 4 0
+Return 0 0
+
+:Label_cc_action_level_1_1_4
+StaticGet2 378
+iPush_4
+Call @menu_get_number
+iPush_5
+Call @menu_get_number
+iPush_6
+Call @menu_get_number
+iPush_2
+CallNative set_cam_rot 5 0
+Return 0 0
+
+:Label_cc_action_level_1_1_5
+StaticGet2 378
+iPush_4
+Call @menu_get_number
+iPush_5
+Call @menu_get_number
+iPush_6
+Call @menu_get_number
+iPush_2
+CallNative set_cam_rot 5 0
+Return 0 0
+
+:Label_cc_action_level_1_1_6
+StaticGet2 378
+iPush_4
+Call @menu_get_number
+iPush_5
+Call @menu_get_number
+iPush_6
+Call @menu_get_number
+iPush_2
+CallNative set_cam_rot 5 0
+Return 0 0
+
+:Label_cc_action_level_1_1_7
+StaticGet2 378
+Call @menu_get_current_number
+CallNative set_cam_fov 2 0
 Return 0 0
 
 :Label_cc_action_level_1_1_end
