@@ -118,6 +118,4 @@ Static_276[* 50]
 Static_327[* 50]
 
 // custom_cam
-
-// custom_cam
 Static_378

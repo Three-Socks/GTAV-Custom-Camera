@@ -70,37 +70,40 @@ PushString "Custom Camera"
 StaticSet1 10
 
 StaticGet1 9
-Switch [0 @Label_level_0]:[1 @Label_level_1]
+Switch [0 @Label_level_0]:[1 @Label_level_1]:[2 @Label_level_2]
 Jump @Label_level_end
 
 :Label_level_0
-PushString "Create Camera"
+PushString "Create"
 Call @menu_addItem
 
-PushString "X"
-Call @menu_addItem
-fPush_0.0
-fPush -9999.9
-fPush 9999.9
-Call @menu_addItem_float
+StaticGet2 378
+CallNative does_cam_exist 1 1
+JumpFalse @Label_level_0_exist
 
-PushString "Y"
+PushString "Camera"
 Call @menu_addItem
-fPush_0.0
-fPush -9999.9
-fPush 9999.9
-Call @menu_addItem_float
+StaticGet2 378
+CallNative is_cam_active 1 1
+Call @menu_addItem_bool
+Call @menu_add_action
 
-PushString "Z"
+PushString "Destroy"
 Call @menu_addItem
-fPush_0.0
-fPush -9999.9
-fPush 9999.9
-Call @menu_addItem_float
+Call @menu_add_action
+
+PushString "Attach"
+Call @menu_addItem
+
+:Label_level_0_exist
 Return 0 0
 
 :Label_level_1
 Call @cc_level_1
+Return 0 0
+
+:Label_level_2
+Call @cc_level_2
 Return 0 0
 
 :Label_level_end
@@ -112,15 +115,10 @@ Function 1 0 7
 iPush_0
 pstatic2 61
 ArrayGet1 1
-Switch [0 @Label_last_selected_0]
+Switch [0 @Label_cc_level_1_0]:[3 @Label_cc_level_1_3]
 Jump @Label_level_1_end
 
-:Label_last_selected_0
-PushString "Name"
-PushString "DEFAULT_SCRIPTED_CAMERA"
-Push1 60
-Call @menu_addItem_keyboard
-
+:Label_cc_level_1_0
 CallNative player_ped_id 0 1
 iPush_1
 CallNative get_entity_coords 2 3
@@ -133,8 +131,9 @@ Call @menu_addItem
 getF 3
 fPush -9999.9
 fPush 9999.9
-iPush_5
+Push1 10
 Call @menu_addItem_float_keyboard
+Call @menu_add_action
 
 PushString "Y Coord"
 Call @menu_addItem
@@ -142,8 +141,9 @@ pFrame1 3
 GetImmediate1 1
 fPush -9999.9
 fPush 9999.9
-iPush_5
+Push1 10
 Call @menu_addItem_float_keyboard
+Call @menu_add_action
 
 PushString "Z Coord"
 Call @menu_addItem
@@ -151,57 +151,148 @@ pFrame1 3
 GetImmediate1 2
 fPush -9999.9
 fPush 9999.9
-iPush_5
+Push1 10
 Call @menu_addItem_float_keyboard
+Call @menu_add_action
 
-PushString "X Coord 2"
+PushString "Rotation X Coord"
 Call @menu_addItem
 fPush_0.0
 fPush -9999.9
 fPush 9999.9
-iPush_5
+Push1 10
 Call @menu_addItem_float_keyboard
+Call @menu_add_action
 
-PushString "Y Coord 2"
+PushString "Rotation Y Coord"
 Call @menu_addItem
 fPush_0.0
 fPush -9999.9
 fPush 9999.9
-iPush_5
+Push1 10
 Call @menu_addItem_float_keyboard
+Call @menu_add_action
 
-PushString "Z Coord 2"
+PushString "Rotation Z Coord"
 Call @menu_addItem
 fPush_0.0
 fPush -9999.9
 fPush 9999.9
-iPush_5
+Push1 10
 Call @menu_addItem_float_keyboard
+Call @menu_add_action
 
-PushString "FOV"
+PushString "Param 1"
 Call @menu_addItem
 fPush 50
 fPush -9999.9
 fPush 9999.9
-Call @menu_addItem_float
+Push1 10
+Call @menu_addItem_float_keyboard
+Call @menu_add_action
 
-PushString "Option 1"
+PushString "Param 2"
 Call @menu_addItem
 iPush_0
 fPush -9999.9
 fPush 9999.9
-Call @menu_addItem_float
+Push1 10
+Call @menu_addItem_float_keyboard
+Call @menu_add_action
 
-PushString "Option 2"
+PushString "Param 3"
 Call @menu_addItem
 iPush_2
 fPush -9999.9
 fPush 9999.9
-Call @menu_addItem_float
+Push1 10
+Call @menu_addItem_float_keyboard
+Call @menu_add_action
+
+PushString "Create"
+Call @menu_addItem_action
+Return 0 0
+
+:Label_cc_level_1_3
+StaticGet2 378
+CallNative does_cam_exist 1 1
+Not
+JumpFalse @Label_cc_level_1_exist
+iPush_1
+Call @cc_cam_error
+Return 0 0
+
+:Label_cc_level_1_exist
+PushString "Head"
+Call @menu_addItem
 Return 0 0
 
 :Label_level_1_end
 Return 0 0
+
+:cc_level_2
+Function 1 0 3
+
+StaticGet2 378
+CallNative does_cam_exist 1 1
+Not
+JumpFalse @Label_cc_level_2_exist
+iPush_2
+Call @cc_cam_error
+Return 0 0
+
+:Label_cc_level_2_exist
+iPush_0
+pstatic2 61
+ArrayGet1 1
+Switch [3 @Label_cc_level_2_3]
+Jump @Label_level_2_end
+
+:Label_cc_level_2_3
+PushString "X Coord"
+Call @menu_addItem
+getF 3
+fPush -9999.9
+fPush 9999.9
+Push1 10
+Call @menu_addItem_float_keyboard
+Call @menu_add_action
+
+PushString "Y Coord"
+Call @menu_addItem
+pFrame1 3
+GetImmediate1 1
+fPush -9999.9
+fPush 9999.9
+Push1 10
+Call @menu_addItem_float_keyboard
+Call @menu_add_action
+
+PushString "Z Coord"
+Call @menu_addItem
+pFrame1 3
+GetImmediate1 2
+fPush -9999.9
+fPush 9999.9
+Push1 10
+Call @menu_addItem_float_keyboard
+Call @menu_add_action
+
+PushString "Attach"
+Call @menu_addItem
+Return 0 0
+
+:Label_level_2_end
+Return 0 0
+
+:cc_cam_error
+Function 1 1 4
+
+PushString "Camera does not exist"
+getF 0
+Call @menu_error
+
+Return 1 0
 
 :menu_set
 Function 1 0 4
@@ -223,7 +314,7 @@ iPush_0
 StaticSet1 7
 
 StaticGet1 9
-Switch [0 @Label_menu_action_level_0]:[1 @Label_menu_action_level_1]
+Switch [0 @Label_menu_action_level_0]:[1 @Label_menu_action_level_1]:[2 @Label_menu_action_level_2]
 Jump @Label_menu_action_goto_end
 
 :Label_menu_action_level_0
@@ -231,6 +322,11 @@ Call @cc_action_level_0
 Jump @Label_menu_action_goto_end
 
 :Label_menu_action_level_1
+Call @cc_action_level_1
+Jump @Label_menu_action_goto_end
+
+:Label_menu_action_level_2
+Call @cc_action_level_2
 Jump @Label_menu_action_goto_end
 
 :Label_menu_action_goto_end
@@ -352,20 +448,172 @@ Return 0 0
 Function 1 0 3
 
 StaticGet1 4
-Switch [0 @Label_cc_0]
+Switch [1 @Label_cc_action_level_0_1]:[2 @Label_cc_action_level_0_2]
 Jump @Label_cc_action_level_0_end
 
-:Label_cc_0
-Call @cc_create_cam
-Jump @Label_cc_action_level_0_end
+:Label_cc_action_level_0_1
+StaticGet2 378
+CallNative does_cam_exist 1 1
+JumpFalse @Label_cc_action_level_0_1_exist
+
+staticget2 378
+StaticGet2 378
+CallNative is_cam_active 1 1
+Not
+CallNative set_cam_active 2 0
+StaticGet2 378
+CallNative is_cam_active 1 1
+Not
+iPush_0
+PushS 3000
+iPush_1
+iPush_0
+CallNative render_script_cams 5 0
+Call @menu_toggle_current_bool
+
+:Label_cc_action_level_0_1_exist
+Return 0 0
+
+:Label_cc_action_level_0_2
+StaticGet2 378
+CallNative does_cam_exist 1 1
+JumpFalse @Label_cc_action_level_0_2_exist
+staticget2 378
+iPush_0
+CallNative set_cam_active 2 0
+iPush_0
+iPush_0
+PushS 3000
+iPush_1
+iPush_0
+CallNative render_script_cams 5 0
+staticget2 378
+iPush_0
+CallNative destroy_cam 2 0
+
+:Label_cc_action_level_0_2_exist
+Return 0 0
 
 :Label_cc_action_level_0_end
 Return 0 0
 
-:cc_create_cam
-Function 1 0 5
+:cc_action_level_1
+Function 1 0 3
 
+iPush_0
+pstatic2 61
+ArrayGet1 1
+Switch [0 @Label_cc_action_level_1_0]
+Jump @Label_cc_action_level_1_end
+
+:Label_cc_action_level_1_0
+StaticGet2 378
+CallNative does_cam_exist 1 1
+JumpFalse @Label_cc_action_level_1_exist
+staticget2 378
+iPush_0
+CallNative set_cam_active 2 0
+iPush_0
+iPush_0
+PushS 3000
+iPush_1
+iPush_0
+CallNative render_script_cams 5 0
+staticget2 378
+iPush_0
+CallNative destroy_cam 2 0
+
+:Label_cc_action_level_1_exist
+PushString "DEFAULT_SCRIPTED_CAMERA"
+iPush_0
+Call @menu_get_number
+iPush_1
+Call @menu_get_number
+iPush_2
+Call @menu_get_number
+iPush_3
+Call @menu_get_number
+iPush_4
+Call @menu_get_number
+iPush_5
+Call @menu_get_number
+iPush_6
+Call @menu_get_number
+iPush_7
+Call @menu_get_number
+Push1 8
+Call @menu_get_number
+CallNative create_cam_with_params 10 1
+StaticSet2 378
+
+staticget2 378
+iPush_1
+CallNative set_cam_active 2 0
+iPush_1
+iPush_0
+PushS 3000
+iPush_1
+iPush_0
+CallNative render_script_cams 5 0
 Return 0 0
+
+:Label_cc_action_level_1_end
+Return 0 0
+
+:cc_action_level_2
+Function 1 0 3
+
+StaticGet2 378
+CallNative does_cam_exist 1 1
+Not
+JumpFalse @Label_cc_action_level_2_exist
+iPush_2
+Call @cc_cam_error
+Return 0 0
+
+:Label_cc_action_level_2_exist
+iPush_0
+pstatic2 61
+ArrayGet1 1
+Switch [3 @Label_cc_action_level_2_3]
+Jump @Label_cc_action_level_2_end
+
+:Label_cc_action_level_2_3
+Call @cc_action_attach_cam
+Return 0 0
+
+:Label_cc_action_level_2_end
+Return 0 0
+
+:cc_action_attach_cam
+Function 1 0 3
+
+iPush_1
+pstatic2 61
+ArrayGet1 1
+Switch [0 @Label_cc_action_attach_cam_0]
+Jump @Label_cc_action_attach_cam_end
+
+:Label_cc_action_attach_cam_0
+PushS 31086
+Call @cc_attach_cam
+Return 0 0
+
+:Label_cc_action_attach_cam_end
+Return 0 0
+
+:cc_attach_cam
+Function 1 1 4
+
+StaticGet2 378
+CallNative player_ped_id 0 1
+getF 0
+fPush_0.0
+fPush 0.15
+fPush 0.02
+iPush_1
+CallNative attach_cam_to_ped_bone 7 0
+Return 1 0
 
 :cc_setup
 Function 1 0 4
