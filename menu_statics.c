@@ -117,5 +117,11 @@ Static_276[* 50]
 // (float) menu_items_float_val (50)
 Static_327[* 50]
 
-// custom_cam
+// cc
 Static_378
+
+// cc_sync_gameplay_coord
+Static_379
+
+// cc_sync_gameplay_rot
+Static_380
