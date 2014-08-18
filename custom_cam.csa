@@ -240,7 +240,7 @@ PushString "Attach"
 Call @menu_addItem
 
 PushString "Detach"
-Call @menu_addItem
+Call @menu_addItem_action
 
 PushString "Sync"
 Call @menu_addItem
@@ -533,13 +533,13 @@ Call @cc_cam_error
 Return 0 0
 
 :Label_cc_level_1_4_exist
-PushString "Sync Coords with Gameplay Camera"
+PushString "Sync Coords"
 Call @menu_addItem
 StaticGet2 379
 Call @menu_addItem_bool
 Call @menu_add_action
 
-PushString "Sync Rot with Gameplay Camera"
+PushString "Sync Rotation"
 Call @menu_addItem
 StaticGet2 380
 Call @menu_addItem_bool
@@ -735,12 +735,14 @@ Jump @Label_cc_action_level_1_4_end
 StaticGet2 379
 Not
 StaticSet2 379
+Call @menu_toggle_current_bool
 Return 0 0
 
 :Label_cc_action_level_1_4_1
 StaticGet2 380
 Not
 StaticSet2 380
+Call @menu_toggle_current_bool
 Return 0 0
 
 :Label_cc_action_level_1_4_end
