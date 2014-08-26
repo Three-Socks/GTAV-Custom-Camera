@@ -222,7 +222,7 @@ Return 0 0
 :cc_level_0
 Function 1 0 4
 
-PushString "Custom Camera 1.0 ALPHA 1"
+PushString "Custom Camera 1.0"
 StaticSet1 10
 
 StaticGet1 9
@@ -507,6 +507,66 @@ fPush 9999.9
 Push1 10
 Call @menu_addItem_float_keyboard
 Call @menu_add_action
+
+PushString "Near Clip"
+Call @menu_addItem
+StaticGet2 378
+CallNative get_cam_near_clip 1 1
+fPush -9999.9
+fPush 9999.9
+Push1 10
+Call @menu_addItem_float_keyboard
+Call @menu_add_action
+
+PushString "Far Clip"
+Call @menu_addItem
+StaticGet2 378
+CallNative get_cam_far_clip 1 1
+fPush -9999.9
+fPush 9999.9
+Push1 10
+Call @menu_addItem_float_keyboard
+Call @menu_add_action
+
+PushString "Depth of Field Planes"
+Call @menu_addItem
+
+PushString "Near Depth of Field"
+Call @menu_addItem
+fPush_0.0
+fPush -9999.9
+fPush 9999.9
+Push1 10
+Call @menu_addItem_float_keyboard
+Call @menu_add_action
+
+PushString "Far Depth of Field"
+Call @menu_addItem
+StaticGet2 378
+CallNative get_cam_far_dof 1 1
+fPush -9999.9
+fPush 9999.9
+Push1 10
+Call @menu_addItem_float_keyboard
+Call @menu_add_action
+
+PushString "Depth of Field Strength"
+Call @menu_addItem
+fPush_0.0
+fPush -9999.9
+fPush 9999.9
+Push1 10
+Call @menu_addItem_float_keyboard
+Call @menu_add_action
+
+PushString "Motion Blur Strength"
+Call @menu_addItem
+fPush_0.0
+fPush -9999.9
+fPush 9999.9
+Push1 10
+Call @menu_addItem_float_keyboard
+Call @menu_add_action
 Return 0 0
 
 :Label_cc_level_1_2
@@ -519,8 +579,125 @@ Call @cc_cam_error
 Return 0 0
 
 :Label_cc_level_1_2_exist
+
 PushString "Head"
 Call @menu_addItem
+PushS 31086
+StaticGet1 5
+pstatic2 384
+ArraySet1 1
+
+PushString "Bone 28422"
+Call @menu_addItem
+PushS 28422
+StaticGet1 5
+pstatic2 384
+ArraySet1 1
+
+PushString "Bone 60309"
+Call @menu_addItem
+PushI24 60309
+StaticGet1 5
+pstatic2 384
+ArraySet1 1
+
+PushString "Bone 57005"
+Call @menu_addItem
+PushI24 57005
+StaticGet1 5
+pstatic2 384
+ArraySet1 1
+
+PushString "Bone 24818"
+Call @menu_addItem
+PushS 24818
+StaticGet1 5
+pstatic2 384
+ArraySet1 1
+
+PushString "Bone 39317"
+Call @menu_addItem
+PushI24 39317
+StaticGet1 5
+pstatic2 384
+ArraySet1 1
+
+PushString "Bone 18905"
+Call @menu_addItem
+PushS 18905
+StaticGet1 5
+pstatic2 384
+ArraySet1 1
+
+PushString "Bone 63931"
+Call @menu_addItem
+PushI24 63931
+StaticGet1 5
+pstatic2 384
+ArraySet1 1
+
+PushString "Bone 36864"
+Call @menu_addItem
+PushI24 36864
+StaticGet1 5
+pstatic2 384
+ArraySet1 1
+
+PushString "Bone 14201"
+Call @menu_addItem
+PushS 14201
+StaticGet1 5
+pstatic2 384
+ArraySet1 1
+
+PushString "Bone 52301"
+Call @menu_addItem
+PushI24 52301
+StaticGet1 5
+pstatic2 384
+ArraySet1 1
+
+PushString "Bone 51826"
+Call @menu_addItem
+PushI24 51826
+StaticGet1 5
+pstatic2 384
+ArraySet1 1
+
+PushString "Bone 11816"
+Call @menu_addItem
+PushS 11816
+StaticGet1 5
+pstatic2 384
+ArraySet1 1
+
+PushString "Bone 40269"
+Call @menu_addItem
+PushI24 40269
+StaticGet1 5
+pstatic2 384
+ArraySet1 1
+
+PushString "Bone 28252"
+Call @menu_addItem
+PushS 28252
+StaticGet1 5
+pstatic2 384
+ArraySet1 1
+
+PushString "Bone 45509"
+Call @menu_addItem
+PushI24 45509
+StaticGet1 5
+pstatic2 384
+ArraySet1 1
+
+PushString "Bone 61163"
+Call @menu_addItem
+PushI24 61163
+StaticGet1 5
+pstatic2 384
+ArraySet1 1
 Return 0 0
 
 :Label_cc_level_1_4
@@ -620,7 +797,7 @@ Return 0 0
 
 :Label_cc_action_level_1_1_exist
 StaticGet1 4
-Switch [0 @Label_cc_action_level_1_1_0]:[1 @Label_cc_action_level_1_1_1]:[2 @Label_cc_action_level_1_1_2]:[3 @Label_cc_action_level_1_1_3]:[4 @Label_cc_action_level_1_1_4]:[5 @Label_cc_action_level_1_1_5]:[6 @Label_cc_action_level_1_1_6]:[7 @Label_cc_action_level_1_1_7]
+Switch [0 @Label_cc_action_level_1_1_0]:[1 @Label_cc_action_level_1_1_1]:[2 @Label_cc_action_level_1_1_2]:[3 @Label_cc_action_level_1_1_3]:[4 @Label_cc_action_level_1_1_4]:[5 @Label_cc_action_level_1_1_5]:[6 @Label_cc_action_level_1_1_6]:[7 @Label_cc_action_level_1_1_7]:[8 @Label_cc_action_level_1_1_8]:[9 @Label_cc_action_level_1_1_9]:[11 @Label_cc_action_level_1_1_11]:[12 @Label_cc_action_level_1_1_12]:[13 @Label_cc_action_level_1_1_13]:[14 @Label_cc_action_level_1_1_14]
 Jump @Label_cc_action_level_1_1_end
 
 :Label_cc_action_level_1_1_0
@@ -714,6 +891,42 @@ Call @menu_get_current_number
 CallNative set_cam_fov 2 0
 Return 0 0
 
+:Label_cc_action_level_1_1_8
+StaticGet2 378
+Call @menu_get_current_number
+CallNative set_cam_near_clip 2 0
+Return 0 0
+
+:Label_cc_action_level_1_1_9
+StaticGet2 378
+Call @menu_get_current_number
+CallNative set_cam_far_clip 2 0
+Return 0 0
+
+:Label_cc_action_level_1_1_11
+StaticGet2 378
+Call @menu_get_current_number
+CallNative set_cam_near_dof 2 0
+Return 0 0
+
+:Label_cc_action_level_1_1_12
+StaticGet2 378
+Call @menu_get_current_number
+CallNative set_cam_far_dof 2 0
+Return 0 0
+
+:Label_cc_action_level_1_1_13
+StaticGet2 378
+Call @menu_get_current_number
+CallNative set_cam_dof_strength 2 0
+Return 0 0
+
+:Label_cc_action_level_1_1_14
+StaticGet2 378
+Call @menu_get_current_number
+CallNative set_cam_motion_blur_strength 2 0
+Return 0 0
+
 :Label_cc_action_level_1_1_end
 Return 0 0
 
@@ -766,31 +979,35 @@ Return 0 0
 iPush_0
 pstatic2 61
 ArrayGet1 1
-Switch [2 @Label_cc_level_2_2]
+Switch [1 @Label_cc_level_2_1]:[2 @Label_cc_level_2_2]
 Jump @Label_level_2_end
 
+:Label_cc_level_2_1
+Call @cc_level_2_options
+Return 0 0
+
 :Label_cc_level_2_2
-PushString "Param 1"
+PushString "X Offset"
 Call @menu_addItem
-fPush_0.0
+StaticGet2 381
 fPush -9999.9
 fPush 9999.9
 Push1 10
 Call @menu_addItem_float_keyboard
 Call @menu_add_action
 
-PushString "Param 2"
+PushString "Y Offset"
 Call @menu_addItem
-fPush 0.15
+StaticGet2 382
 fPush -9999.9
 fPush 9999.9
 Push1 10
 Call @menu_addItem_float_keyboard
 Call @menu_add_action
 
-PushString "Param 3"
+PushString "Z Offset"
 Call @menu_addItem
-fPush 0.02
+StaticGet2 383
 fPush -9999.9
 fPush 9999.9
 Push1 10
@@ -802,6 +1019,65 @@ Call @menu_addItem_action
 Return 0 0
 
 :Label_level_2_end
+Return 0 0
+
+:cc_level_2_options
+Function 1 0 3
+
+StaticGet2 378
+CallNative does_cam_exist 1 1
+Not
+JumpFalse @Label_cc_level_2_options_exist
+iPush_3
+Call @cc_cam_error
+Return 0 0
+
+:Label_cc_level_2_options_exist
+iPush_1
+pstatic2 61
+ArrayGet1 1
+Switch [10 @Label_cc_level_2_options_10]
+Jump @Label_cc_level_2_options_end
+
+:Label_cc_level_2_options_10
+PushString "Param 1"
+Call @menu_addItem
+fPush_0.0
+fPush -9999.9
+fPush 9999.9
+Push1 10
+Call @menu_addItem_float_keyboard
+Call @menu_add_action
+
+PushString "Param 2"
+Call @menu_addItem
+fPush_0.0
+fPush -9999.9
+fPush 9999.9
+Push1 10
+Call @menu_addItem_float_keyboard
+Call @menu_add_action
+
+PushString "Param 3"
+Call @menu_addItem
+fPush_0.0
+fPush -9999.9
+fPush 9999.9
+Push1 10
+Call @menu_addItem_float_keyboard
+Call @menu_add_action
+
+PushString "Param 4"
+Call @menu_addItem
+fPush_0.0
+fPush -9999.9
+fPush 9999.9
+Push1 10
+Call @menu_addItem_float_keyboard
+Call @menu_add_action
+Return 0 0
+
+:Label_cc_level_2_options_end
 Return 0 0
 
 :cc_action_level_2
@@ -819,8 +1095,12 @@ Return 0 0
 iPush_0
 pstatic2 61
 ArrayGet1 1
-Switch [2 @Label_cc_action_level_2_2]
+Switch [1 @Label_cc_action_level_2_1]:[2 @Label_cc_action_level_2_2]
 Jump @Label_cc_action_level_2_end
+
+:Label_cc_action_level_2_1
+Call @cc_action_level_2_options
+Return 0 0
 
 :Label_cc_action_level_2_2
 Call @cc_action_attach_cam
@@ -829,21 +1109,41 @@ Return 0 0
 :Label_cc_action_level_2_end
 Return 0 0
 
+:cc_action_level_2_options
+Function 1 0 3
+
+iPush_1
+pstatic2 61
+ArrayGet1 1
+Switch [10 @Label_cc_action_level_2_options_10]
+Jump @Label_cc_action_level_2_options_end
+
+:Label_cc_action_level_2_options_10
+StaticGet2 378
+iPush_0
+Call @menu_get_number
+iPush_1
+Call @menu_get_number
+iPush_2
+Call @menu_get_number
+iPush_3
+Call @menu_get_number
+CallNative set_cam_dof_planes 5 0
+Return 0 0
+
+:Label_cc_action_level_2_options_end
+Return 0 0
+
 :cc_action_attach_cam
 Function 1 0 3
 
 iPush_1
 pstatic2 61
 ArrayGet1 1
-Switch [0 @Label_cc_action_attach_cam_0]
-Jump @Label_cc_action_attach_cam_end
-
-:Label_cc_action_attach_cam_0
-PushS 31086
+pstatic2 384
+ArrayGet1 1
 Call @cc_attach_cam
-Return 0 0
 
-:Label_cc_action_attach_cam_end
 Return 0 0
 
 :cc_attach_cam
@@ -860,6 +1160,16 @@ iPush_2
 Call @menu_get_number
 iPush_1
 CallNative attach_cam_to_ped_bone 7 0
+
+iPush_0
+call @menu_get_number
+StaticSet2 381
+iPush_1
+call @menu_get_number
+StaticSet2 382
+iPush_2
+call @menu_get_number
+StaticSet2 383
 Return 1 0
 
 :cc_cam_error
@@ -1026,6 +1336,13 @@ Function 1 0 4
 
 iPush_0
 Call @menu_set_open_state
+
+fPush_0.0
+StaticSet2 381
+fPush 0.15
+StaticSet2 382
+fPush 0.02
+StaticSet2 383
 
 Return 0 0
 

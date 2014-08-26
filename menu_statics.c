@@ -125,3 +125,15 @@ Static_379
 
 // cc_sync_gameplay_rot
 Static_380
+
+// cc_attach_x
+Static_381 = 0.0
+
+// cc_attach_y
+Static_382 = 0.15
+
+// cc_attach_z
+Static_383 = 0.02
+
+// cc__stored_selected (30)
+Static_384[* 30]
