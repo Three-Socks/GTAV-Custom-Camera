@@ -117,23 +117,26 @@ Static_276[* 50]
 // (float) menu_items_float_val (50)
 Static_327[* 50]
 
-// cc
+// menu_just_opened
 Static_378
 
-// cc_sync_gameplay_coord
-Static_379
+// menu_stored_data
+Static_379[* 50]
 
-// cc_sync_gameplay_rot
+// cc
 Static_380
 
+// cc_sync_gameplay_coord
+Static_381
+
+// cc_sync_gameplay_rot
+Static_382
+
 // cc_attach_x
-Static_381 = 0.0
+Static_383 = 0.0
 
 // cc_attach_y
-Static_382 = 0.15
+Static_384 = 0.15
 
 // cc_attach_z
-Static_383 = 0.02
-
-// cc__stored_selected (30)
-Static_384[* 30]
+Static_385 = 0.02
