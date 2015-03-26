@@ -35,7 +35,7 @@ Call @menu_get_action_mode
 JumpNE @Label_main_draw
 
 iPush_2
-Push1 175
+Push1 178
 CallNative is_disabled_control_just_released 2 1
 dup
 Not
@@ -165,11 +165,11 @@ CallNative is_pause_menu_active 0 1
 Not
 JumpFalse @Label_load_pressed_3
 iPush_2
-Push1 179
+Push1 182
 CallNative is_control_pressed 2 1
 JumpFalse @Label_load_pressed_3
 iPush_2
-Push1 183
+Push1 186
 CallNative is_control_pressed 2 1
 JumpFalse @Label_load_pressed_3
 
@@ -177,7 +177,7 @@ iPush_0
 Push1 22
 CallNative disable_control_action 2 0
 iPush_0
-Push1 42
+Push1 44
 CallNative disable_control_action 2 0
 
 Call @menu_get_open_state
@@ -2265,48 +2265,48 @@ iPush_0
 CallNative disable_control_action 2 0
 
 iPush_0
-Push1 90
+Push1 92
 CallNative disable_control_action 2 0
 iPush_0
-Push1 73
+Push1 75
 CallNative disable_control_action 2 0
 iPush_2
-Push1 176
+Push1 179
 CallNative set_input_exclusive 2 0
 iPush_2
-Push1 174
+Push1 177
 CallNative set_input_exclusive 2 0
 iPush_2
-Push1 175
+Push1 178
 CallNative set_input_exclusive 2 0
 
 iPush_0
-Push1 46
+Push1 48
 CallNative disable_control_action 2 0
 iPush_2
-Push1 161
+Push1 164
 CallNative set_input_exclusive 2 0
 iPush_2
-Push1 162
+Push1 165
 CallNative set_input_exclusive 2 0
 
 iPush_2
-Push1 174
+Push1 177
 CallNative disable_control_action 2 0
 iPush_2
-Push1 175
+Push1 178
 CallNative disable_control_action 2 0
 iPush_2
-Push1 163
+Push1 166
+CallNative disable_control_action 2 0
+iPush_2
+Push1 167
 CallNative disable_control_action 2 0
 iPush_2
 Push1 164
 CallNative disable_control_action 2 0
 iPush_2
-Push1 161
-CallNative disable_control_action 2 0
-iPush_2
-Push1 162
+Push1 165
 CallNative disable_control_action 2 0
 
 Push1 10
@@ -2321,25 +2321,19 @@ Push1 8
 CallNative hide_hud_component_this_frame 1 0
 
 iPush_2
-Push1 163
+Push1 166
 CallNative set_input_exclusive 2 0
 iPush_2
-Push1 164
+Push1 167
 CallNative set_input_exclusive 2 0
 
 iPush_0
 Push1 20
 CallNative disable_control_action 2 0
 iPush_0
-Push1 59
+Push1 61
 CallNative disable_control_action 2 0
 
-iPush_0
-Push1 85
-CallNative disable_control_action 2 0
-iPush_0
-Push1 86
-CallNative disable_control_action 2 0
 iPush_0
 Push1 87
 CallNative disable_control_action 2 0
@@ -2349,18 +2343,15 @@ CallNative disable_control_action 2 0
 iPush_0
 Push1 89
 CallNative disable_control_action 2 0
+iPush_0
+Push1 90
+CallNative disable_control_action 2 0
+iPush_0
+Push1 91
+CallNative disable_control_action 2 0
 
 iPush_0
 Push1 37
-CallNative disable_control_action 2 0
-iPush_0
-Push1 136
-CallNative disable_control_action 2 0
-iPush_0
-Push1 137
-CallNative disable_control_action 2 0
-iPush_0
-Push1 138
 CallNative disable_control_action 2 0
 iPush_0
 Push1 139
@@ -2381,69 +2372,78 @@ iPush_0
 Push1 144
 CallNative disable_control_action 2 0
 iPush_0
+Push1 145
+CallNative disable_control_action 2 0
+iPush_0
+Push1 146
+CallNative disable_control_action 2 0
+iPush_0
+Push1 147
+CallNative disable_control_action 2 0
+iPush_0
 Push1 14
 CallNative disable_control_action 2 0
 iPush_0
 Push1 15
 CallNative disable_control_action 2 0
 iPush_0
-Push1 50
+Push1 52
 CallNative disable_control_action 2 0
 iPush_0
-Push1 51
-CallNative disable_control_action 2 0
-iPush_0
-Push1 120
-CallNative disable_control_action 2 0
-iPush_0
-Push1 121
+Push1 53
 CallNative disable_control_action 2 0
 iPush_0
 Push1 123
 CallNative disable_control_action 2 0
 iPush_0
+Push1 124
+CallNative disable_control_action 2 0
+iPush_0
+Push1 126
+CallNative disable_control_action 2 0
+iPush_0
+Push1 47
+CallNative disable_control_action 2 0
+iPush_0
+Push1 69
+CallNative disable_control_action 2 0
+iPush_0
+Push1 78
+CallNative disable_control_action 2 0
+iPush_0
+Push1 44
+CallNative disable_control_action 2 0
+iPush_0
 Push1 45
 CallNative disable_control_action 2 0
 iPush_0
-Push1 67
+Push1 54
 CallNative disable_control_action 2 0
 iPush_0
-Push1 76
-CallNative disable_control_action 2 0
-iPush_0
-Push1 42
-CallNative disable_control_action 2 0
-iPush_0
-Push1 43
-CallNative disable_control_action 2 0
-iPush_0
-Push1 52
-CallNative disable_control_action 2 0
-iPush_0
-Push1 73
+Push1 75
 CallNative disable_control_action 2 0
 
 iPush_0
 Push1 22
 CallNative disable_control_action 2 0
 iPush_0
-Push1 90
+Push1 92
 CallNative disable_control_action 2 0
 iPush_0
-Push1 103
+Push1 106
 CallNative disable_control_action 2 0
 
 iPush_0
-Push1 146
-CallNative disable_control_action 2 0
-iPush_0
-Push1 145
-CallNative disable_control_action 2 0
-iPush_0
-Push1 147
+Push1 149
 CallNative disable_control_action 2 0
 iPush_0
 Push1 148
+CallNative disable_control_action 2 0
+iPush_0
+Push1 150
+CallNative disable_control_action 2 0
+iPush_0
+Push1 151
 CallNative disable_control_action 2 0
 iPush_0
 Push1 19
@@ -2963,7 +2963,7 @@ fPush 0.010
 setF 8
 
 iPush_2
-Push1 178
+Push1 181
 CallNative is_control_pressed 2 1
 JumpFalse @Label_catch_button_press_left_float_slower
 fPush 0.001
@@ -2971,7 +2971,7 @@ setF 8
 
 :Label_catch_button_press_left_float_slower
 iPush_2
-Push1 179
+Push1 182
 CallNative is_control_pressed 2 1
 JumpFalse @Label_catch_button_press_left_float_faster
 fPush 0.100
@@ -3118,7 +3118,7 @@ fPush 0.010
 setF 8
 
 iPush_2
-Push1 178
+Push1 181
 CallNative is_control_pressed 2 1
 JumpFalse @Label_catch_button_press_right_float_slower
 fPush 0.001
@@ -3126,7 +3126,7 @@ setF 8
 
 :Label_catch_button_press_right_float_slower
 iPush_2
-Push1 179
+Push1 182
 CallNative is_control_pressed 2 1
 JumpFalse @Label_catch_button_press_right_float_faster
 fPush 0.100
@@ -3236,7 +3236,7 @@ Return 0 0
 :menu_catch_select_button_press
 Function 1 0 4
 iPush_2
-Push1 174
+Push1 177
 CallNative is_disabled_control_just_pressed 2 1
 JumpFalse @Label_741
 StaticGet1 17
@@ -3280,7 +3280,7 @@ Jump @Label_catch_select_button_press_end
 
 :Label_741
 iPush_2
-Push1 175
+Push1 178
 CallNative is_disabled_control_just_released 2 1
 JumpFalse @Label_catch_select_button_press_square
 
@@ -3317,7 +3317,7 @@ Jump @Label_catch_select_button_press_end
 
 :Label_catch_select_button_press_square
 iPush_2
-Push1 176
+Push1 179
 CallNative is_disabled_control_just_pressed 2 1
 JumpFalse @Label_catch_select_button_press_end
 
@@ -3860,12 +3860,12 @@ Return 1 1
 Function 1 1 4
 
 iPush_2
-Push1 162
+Push1 165
 CallNative is_disabled_control_just_pressed 2 1
 dup
 Not
 JumpFalse @Label_menu_up_pressed_or
-Push1 162
+Push1 165
 Call @menu_is_hold_pressed
 Or
 
@@ -3879,7 +3879,7 @@ Return 1 1
 :Label_menu_up_pressed_hold
 getF 0
 JumpFalse @Label_menu_up_pressed_end
-Push1 162
+Push1 165
 Call @menu_do_hold_pressed
 
 :Label_menu_up_pressed_end
@@ -3889,12 +3889,12 @@ Return 1 1
 :menu_down_pressed
 Function 1 1 4
 iPush_2
-Push1 161
+Push1 164
 CallNative is_disabled_control_just_pressed 2 1
 dup
 Not
 JumpFalse @Label_menu_down_pressed_or
-Push1 161
+Push1 164
 Call @menu_is_hold_pressed
 Or
 
@@ -3908,7 +3908,7 @@ Return 1 1
 :Label_menu_down_pressed_hold
 getF 0
 JumpFalse @Label_menu_down_pressed_end
-Push1 161
+Push1 164
 Call @menu_do_hold_pressed
 
 :Label_menu_down_pressed_end
@@ -3918,12 +3918,12 @@ Return 1 1
 :menu_left_pressed
 Function 1 1 4
 iPush_2
-Push1 163
+Push1 166
 CallNative is_disabled_control_just_pressed 2 1
 dup
 Not
 JumpFalse @Label_menu_left_pressed_or
-Push1 163
+Push1 166
 Call @menu_is_hold_pressed
 Or
 
@@ -3937,7 +3937,7 @@ Return 1 1
 :Label_menu_left_pressed_hold
 getF 0
 JumpFalse @Label_menu_left_pressed_end
-Push1 163
+Push1 166
 Call @menu_do_hold_pressed
 
 :Label_menu_left_pressed_end
@@ -3947,12 +3947,12 @@ Return 1 1
 :menu_right_pressed
 Function 1 1 4
 iPush_2
-Push1 164
+Push1 167
 CallNative is_disabled_control_just_pressed 2 1
 dup
 Not
 JumpFalse @Label_menu_right_pressed_or
-Push1 164
+Push1 167
 Call @menu_is_hold_pressed
 Or
 
@@ -3966,7 +3966,7 @@ Return 1 1
 :Label_menu_right_pressed_hold
 getF 0
 JumpFalse @Label_menu_right_pressed_end
-Push1 164
+Push1 167
 Call @menu_do_hold_pressed
 
 :Label_menu_right_pressed_end
